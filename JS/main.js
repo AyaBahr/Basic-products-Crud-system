@@ -134,7 +134,7 @@ function validationProductCategory() {
     }
 }
 function validationProductDesc() {
-    var regx = /^[a-zA-Z0-9|!$*&@#]{0,500}$/;
+    var regx = /^[a-zA-Z0-9|!$*&@#] {0,500}$/;
     if (regx.test(productDesc.value) == true) {
         return true
     }
