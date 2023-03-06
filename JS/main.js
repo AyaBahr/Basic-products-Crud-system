@@ -125,7 +125,7 @@ function validationProductPrice() {
     }
 }
 function validationProductCategory() {
-    var regx = /^(mobile|tv|device)$/;
+    var regx = /^(mobile|tv|device)$/ig;
     if (regx.test(productCategory.value) == true) {
         return true
     }
@@ -134,7 +134,7 @@ function validationProductCategory() {
     }
 }
 function validationProductDesc() {
-    var regx = /^[a-zA-Z0-9|!$*&@#] {0,500}$/;
+    var regx = /^[a-zA-Z0-9|!$*&@#,. ]{0,500}$/;
     if (regx.test(productDesc.value) == true) {
         return true
     }
