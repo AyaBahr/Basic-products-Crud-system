@@ -1,0 +1,26 @@
+.sec-content span {
+    color: #ff014f;
+
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.sec-icons .one i {
+    font-size: 1.5rem;
+    box-shadow: 2px 2px 5px 1px black;
+    padding: 1rem 1rem;
+    border-radius: 5px;
+    margin: 0px 5px;
+}
+
+.form-control:invalid
+{    outline: red !important;
+}
+
+.form-control:valid
+{
+    outline: green !important;
+}
