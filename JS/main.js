@@ -1,4 +1,5 @@
 
+
 var productName = document.getElementById("productNameInp")
 var productPrice = document.getElementById("productPriceInp")
 var productCategory = document.getElementById("productCategoryInp")
@@ -8,8 +9,7 @@ var productDesc = document.getElementById("productDescInp")
 
 var productContainer = [];
 
-var start = `create`;
-var tmp;
+var start = 0;
 
 if (localStorage.getItem(`productsData`) != null) {
     productContainer = JSON.parse(localStorage.getItem(`productsData`));
@@ -17,22 +17,19 @@ if (localStorage.getItem(`productsData`) != null) {
 }
 
 function addProduct() {
+    var product = {
+        name: productName.value,
+        price: productPrice.value,
+        category: productCategory.value,
+        desc: productDesc.value,
+    }
+
+if(document.getElementById('update').innerHTML == "create product"){
     if (validationProductName() == true) {
         if (validationProductPrice() == true) {
             if (validationProductCategory() == true) {
                 if (validationProductDesc() == true) {
-                    var product = {
-                        name: productName.value,
-                        price: productPrice.value,
-                        category: productCategory.value,
-                        desc: productDesc.value,
-                    }
                     productContainer.push(product)
-                    console.log(productContainer)
-                    localStorage.setItem(`productsData`, JSON.stringify(productContainer))
-                    displayProducts(productContainer)
-                    clearForm()
-
                 }
                 else {
                     alert("Plz enter valid product Description")
@@ -49,6 +46,16 @@ function addProduct() {
     else {
         alert("Plz enter valid product name")
     }
+}
+else{
+    productContainer.splice(start,1,product);
+    document.getElementById('update').innerHTML = "create product"
+
+
+}
+localStorage.setItem(`productsData`, JSON.stringify(productContainer))
+displayProducts(productContainer)
+clearForm()
 
 }
 
@@ -78,14 +85,14 @@ function displayProducts(x) {
 }
 /* Responsible for getting items into the inputs */
 
-function updateProduct(index) {
-    productName.value = productContainer[index].name;
-    productPrice.value = productContainer[index].price;
-    productCategory.value = productContainer[index].category;
-    productDesc.value = productContainer[index].desc;
-    document.getElementById(`update`).innerHTML = `Update`;
-    start = `update`;
-    tmp = index;
+function updateProduct(i) {
+    start = i 
+    console.log(start);
+    productName.value = productContainer[i].name;
+    productPrice.value = productContainer[i].price;
+    productCategory.value = productContainer[i].category;
+    productDesc.value = productContainer[i].desc;
+    document.getElementById('update').innerHTML = "Update"
 }
 
 function deleteProduct(i) {
@@ -106,7 +113,7 @@ function search(x) {
 
 
 function validationProductName() {
-    var regx = /^[A-Z][a-zA-Z0-9]{2,7}$/;
+    var regx = /^[A-Z][a-zA-Z0-9 ]{2,7}$/;
     if (regx.test(productName.value) == true) {
         return true
     }
@@ -125,7 +132,7 @@ function validationProductPrice() {
     }
 }
 function validationProductCategory() {
-    var regx = /^(mobile|tv|device)$/ig;
+    var regx = /^(mobile|tv|device)$/;
     if (regx.test(productCategory.value) == true) {
         return true
     }
@@ -134,7 +141,7 @@ function validationProductCategory() {
     }
 }
 function validationProductDesc() {
-    var regx = /^[a-zA-Z0-9|!$*&@#,. ]{0,500}$/;
+    var regx = /^[a-zA-Z0-9|!$*&@# .,]{0,500}$/;
     if (regx.test(productDesc.value) == true) {
         return true
     }
